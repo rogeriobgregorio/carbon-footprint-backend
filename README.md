@@ -1,98 +1,162 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Carbon Footprint
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Uma plataforma interativa para calcular, visualizar e reduzir a sua pegada de carbono com base em seus hábitos diários. O sistema oferece sugestões personalizadas e integração com API de precificação de crédito de carbono.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 💡 Objetivo
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+O **Carbon Footprint** tem como objetivo conscientizar os usuários sobre o impacto ambiental de suas ações cotidianas, permitindo:
 
-## Project setup
+* O cálculo da pegada de carbono (CO₂) com base em hábitos de transporte, consumo de energia, alimentação, entre outros.
+* A visualização de resultados por categoria em um dashboard interativo.
+* A oferta de sugestões práticas para reduzir ou compensar suas emissões.
 
-```bash
-$ npm install
+---
+
+## 🧩 Funcionalidades
+
+### 1. Cadastro e Autenticação
+
+* Registro e login de usuários com autenticação JWT.
+* Gerenciamento de perfil pessoal.
+
+### 2. Formulário de Hábitos
+
+* Transporte: tipo de veículo, distância média, frequência.
+* Energia: consumo mensal em kWh.
+* Alimentação: frequência de consumo de carne, laticínios e industrializados.
+* Consumo geral: roupas, eletrônicos, viagens.
+
+### 3. Cálculo da Pegada de Carbono
+
+* Baseado em fatores de emissão reconhecidos (ex: 0.21 kg CO₂/km para carro a gasolina).
+* Exibição do resultado em kg ou toneladas de CO₂ por mês/ano.
+* Aplicação do Strategy Pattern para isolar as lógicas de cálculo por categoria.
+
+### 4. Dashboard Interativo
+
+* Visualização gráfica das emissões totais e por categoria.
+* Histórico de emissões.
+* Dicas personalizadas para redução da pegada.
+
+### 5. Sugestões de Compensação
+
+* Recomendações práticas como:
+
+  * 🌳 “Plante 5 árvores”
+  * 🚲 “Adote transporte público”
+  * 💳 “Compre 1 crédito de carbono”
+
+### 6. Integração com API SOAP
+
+* Integração (mockada ou real) com API de precificação de crédito de carbono.
+* Consulta ao valor da tonelada de CO₂ em reais ou dólares.
+
+---
+
+## 🏗️ Arquitetura Backend
+
+Implementação com **NestJS** seguindo o padrão **Clean Architecture**:
+
+```
+/src
+  /domain
+    /entities
+    /value-objects
+    /repositories
+    /services
+  /application
+    /use-cases
+  /infra
+    /repositories
+    /soap
+  /presentation
+    /controllers
+    /dtos
+    /guards
 ```
 
-## Compile and run the project
+* Uso de princípios **SOLID**.
+* Injeção de dependência via interfaces.
+* Lógicas de domínio puras, sem dependência de frameworks.
+* DTOs e validações definidos na camada de apresentação.
+
+---
+
+## 🌐 Frontend (Angular)
+
+Interface desenvolvida em **Angular**, com foco em experiência do usuário e reatividade:
+
+### Telas disponíveis:
+
+* Login / Cadastro
+* Formulário de entrada de hábitos
+* Página de resultado e resumo da pegada
+* Dashboard com gráficos e histórico
+* Dicas e sugestões de compensação
+
+#### Tecnologias:
+
+* **ng2-charts** ou **ngx-echarts** para visualizações.
+* **RxJS** para comunicação reativa com o backend.
+* **Angular Services** para integração com APIs.
+
+---
+
+## 🧪 Extras Técnicos
+
+* ✅ **Testes unitários**:
+
+  * Backend: **Jest**
+  * Frontend: **Jasmine / Karma**
+* 🚀 **CI/CD** (opcional): com **GitHub Actions**
+* 📘 **Swagger** para documentação automática da API
+* 🐳 **Docker** para ambientes de desenvolvimento e produção
+
+---
+
+## 📦 Como Executar o Projeto
+
+### Pré-requisitos
+
+* Node.js e npm
+* Docker e Docker Compose (opcional)
+* Angular CLI
+* NestJS CLI
+
+### Clonando o projeto
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/rogeriobgregorio/carbon-footprint-backend.git
+cd carbon-footprint-backend
 ```
 
-## Run tests
+### Rodando com Docker
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker-compose up --build
 ```
 
-## Deployment
+### Ou executando localmente
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+#### Backend
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### Frontend
 
-## Resources
+```bash
+npm install
+ng serve
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 📄 Licença
 
-## Support
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
