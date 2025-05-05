@@ -6,13 +6,14 @@ import { CarbonFootprintEntryRepository } from '@domain/repositories/carbon-foot
 import { CarbonFootprintController } from '@presentation/controllers/carbon-footprint.controller';
 import { CreateCarbonFootprintEntryUseCase } from '@application/use-cases/create-carbon-footprint-entry/create-carbon-footprint-entry.usecase';
 import { GetCarbonFootprintHistoryUseCase } from '@application/use-cases/get-carbon-footprint-history/get-carbon-footprint-history.usecase';
+import { CarbonCalculationService } from '@domain/services/carbon-calculation/carbon-calculation.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: 'CarbonFootprintEntry', schema: CarbonFootprintEntrySchema },
     ]),
-  ],  
+  ],
   controllers: [CarbonFootprintController],
   providers: [
     {
@@ -21,6 +22,7 @@ import { GetCarbonFootprintHistoryUseCase } from '@application/use-cases/get-car
     },
     CreateCarbonFootprintEntryUseCase,
     GetCarbonFootprintHistoryUseCase,
+    CarbonCalculationService,
   ],
   exports: [CarbonFootprintEntryRepository],
 })
