@@ -7,6 +7,7 @@ import { CarbonFootprintController } from '@presentation/controllers/carbon-foot
 import { CreateCarbonFootprintEntryUseCase } from '@application/use-cases/create-carbon-footprint-entry/create-carbon-footprint-entry.usecase';
 import { GetCarbonFootprintHistoryUseCase } from '@application/use-cases/get-carbon-footprint-history/get-carbon-footprint-history.usecase';
 import { CarbonCalculationService } from '@domain/services/carbon-calculation/carbon-calculation.service';
+import { CarbonOffsetSoapService } from '@infra/soap/carbon-offset.soap.service';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CarbonCalculationService } from '@domain/services/carbon-calculation/ca
     CreateCarbonFootprintEntryUseCase,
     GetCarbonFootprintHistoryUseCase,
     CarbonCalculationService,
+    CarbonOffsetSoapService,
   ],
   exports: [CarbonFootprintEntryRepository],
 })
