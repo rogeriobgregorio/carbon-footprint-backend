@@ -50,7 +50,7 @@ O **Carbon Footprint** tem como objetivo conscientizar os usuários sobre o impa
 
 ### 6. Integração com API SOAP
 
-* Integração (mockada ou real) com API de precificação de crédito de carbono.
+* Integração (mockada com SoapUI) com API de precificação de crédito de carbono.
 * Consulta ao valor da tonelada de CO₂ em reais ou dólares.
 
 ---
@@ -110,7 +110,6 @@ Interface desenvolvida em **Angular**, com foco em experiência do usuário e re
 
   * Backend: **Jest**
   * Frontend: **Jasmine / Karma**
-* 🚀 **CI/CD** (opcional): com **GitHub Actions**
 * 📘 **Swagger** para documentação automática da API
 * 🐳 **Docker** para ambientes de desenvolvimento e produção
 
