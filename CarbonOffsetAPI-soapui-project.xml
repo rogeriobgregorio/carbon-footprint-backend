@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="ae8d4330-dcb7-4027-ba90-bd9f5927ac8f" activeEnvironment="Default" name="CarbonOffsetAPI" resourceRoot="" soapui-version="5.8.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="81250b19-912b-4118-b06d-59e8e904663e" wsaVersion="NONE" name="CarbonOffsetBinding" type="wsdl" bindingName="{http://example.com/carbon}CarbonOffsetBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/Pichau/Desktop/Estudo/carbon-footprint-backend/carbon-offset.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\Pichau\Desktop\Estudo\carbon-footprint-backend\carbon-offset.wsdl"><con:part><con:url>file:\C:\Users\Pichau\Desktop\Estudo\carbon-footprint-backend\carbon-offset.wsdl</con:url><con:content><![CDATA[<definitions name="CarbonOffsetService" targetNamespace="http://example.com/carbon" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://example.com/carbon">
+  <types>
+    <xsd:schema targetNamespace="http://example.com/carbon">
+      <xsd:element name="GetCarbonOffsetCost">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="co2Emission" type="xsd:float"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetCarbonOffsetCostResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="costUSD" type="xsd:float"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="GetCarbonOffsetCostRequest">
+    <part name="parameters" element="tns:GetCarbonOffsetCost"/>
+  </message>
+  <message name="GetCarbonOffsetCostResponse">
+    <part name="parameters" element="tns:GetCarbonOffsetCostResponse"/>
+  </message>
+  <portType name="CarbonOffsetPortType">
+    <operation name="GetCarbonOffsetCost">
+      <input message="tns:GetCarbonOffsetCostRequest"/>
+      <output message="tns:GetCarbonOffsetCostResponse"/>
+    </operation>
+  </portType>
+  <binding name="CarbonOffsetBinding" type="tns:CarbonOffsetPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetCarbonOffsetCost">
+      <soap:operation soapAction="GetCarbonOffsetCost"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="CarbonOffsetService">
+    <port name="CarbonOffsetPort" binding="tns:CarbonOffsetBinding">
+      <soap:address location="http://localhost:8080/mockCarbonOffset"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://DESKTOP-ROGERIO:8088/mockCarbonOffsetBinding</con:endpoint><con:endpoint>http://localhost:8080/mockCarbonOffset</con:endpoint></con:endpoints><con:operation id="8c1c7391-fcdb-4353-90fd-df6fed10c746" isOneWay="false" action="GetCarbonOffsetCost" name="GetCarbonOffsetCost" bindingOperationName="GetCarbonOffsetCost" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="25b4950c-b271-454d-856f-344ac62e8dc9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mockCarbonOffset</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:car="http://example.com/carbon">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <car:GetCarbonOffsetCost>\r
+         <co2Emission>?</co2Emission>\r
+      </car:GetCarbonOffsetCost>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetCarbonOffsetCost"/></con:call></con:operation></con:interface><con:mockService id="ee376255-ea25-4532-bc62-0961e754d08f" port="8088" path="/mockCarbonOffsetBinding" host="DESKTOP-ROGERIO" name="MockCarbonOffsetService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="GetCarbonOffsetCost" id="74e19df8-f6d4-470f-9406-f58c61d46a91" interface="CarbonOffsetBinding" operation="GetCarbonOffsetCost"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="e66cc2e3-8920-458c-a049-aa25fcabcab9" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <GetCarbonOffsetCostResponse xmlns="http://example.com/carbon">
+      <costUSD>8.75</costUSD>
+    </GetCarbonOffsetCostResponse>
+  </soap:Body>
+</soap:Envelope>
+]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetCarbonOffsetCost"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

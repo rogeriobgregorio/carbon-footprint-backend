@@ -1,0 +1,61 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://example.com/carbon"
+             name="CarbonOffsetService"
+             targetNamespace="http://example.com/carbon">
+
+  <types>
+    <xsd:schema targetNamespace="http://example.com/carbon">
+      <xsd:element name="GetCarbonOffsetCost">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="co2Emission" type="xsd:float"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetCarbonOffsetCostResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="costUSD" type="xsd:float"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="GetCarbonOffsetCostRequest">
+    <part name="parameters" element="tns:GetCarbonOffsetCost"/>
+  </message>
+
+  <message name="GetCarbonOffsetCostResponse">
+    <part name="parameters" element="tns:GetCarbonOffsetCostResponse"/>
+  </message>
+
+  <portType name="CarbonOffsetPortType">
+    <operation name="GetCarbonOffsetCost">
+      <input message="tns:GetCarbonOffsetCostRequest"/>
+      <output message="tns:GetCarbonOffsetCostResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="CarbonOffsetBinding" type="tns:CarbonOffsetPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetCarbonOffsetCost">
+      <soap:operation soapAction="GetCarbonOffsetCost"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="CarbonOffsetService">
+    <port name="CarbonOffsetPort" binding="tns:CarbonOffsetBinding">
+      <soap:address location="http://localhost:8080/mockCarbonOffset"/>
+    </port>
+  </service>
+</definitions>
