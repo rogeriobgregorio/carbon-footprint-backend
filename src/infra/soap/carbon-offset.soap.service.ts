@@ -1,23 +1,18 @@
 import { Injectable } from '@nestjs/common';
-// import * as soap from 'soap';
+import * as soap from 'soap';
 
 @Injectable()
 export class CarbonOffsetSoapService {
-  // URL fictícia do WSDL do serviço SOAP
-  // Em produção, descomente a linha abaixo e forneça a URL correta do WSDL
-  // private wsdlUrl = 'http://example.com/carbon-offset.wsdl';
+  // URL mockada para testes locais com o SoapUI
+  // Em produção, deve ser a URL do serviço SOAP real
+  private readonly wsdlUrl = 'http://localhost:8088/mockCarbonOffsetBinding?WSDL';
 
   async getOffsetCost(emissionKg: number): Promise<number> {
-    // Simulação do comportamento SOAP
-    // Em produção, use: const client = await soap.createClientAsync(this.wsdlUrl);
-    // const [result] = await client.GetCarbonOffsetCostAsync({ co2Emission: emissionKg });
-
-    // Simulando resposta SOAP
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const costPerKg = 0.0225; // valor fictício por kg de CO2
-        resolve(parseFloat((emissionKg * costPerKg).toFixed(2)));
-      }, 500);
+    const client = await soap.createClientAsync(this.wsdlUrl);
+    const [result] = await client.GetCarbonOffsetCostAsync({
+      co2Emission: emissionKg,
     });
+
+    return parseFloat(result.costUSD);
   }
 }
